@@ -1,5 +1,423 @@
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<style>
+    * {
+         box-sizing: border-box;
+         list-style: none;
+         padding: 0;
+         margin: 0;
+         text-decoration: none;
+    }
+    html{
+        scroll-behavior: smooth;
+    }
+    h1{
+        text-align: center;
+        font-family: helvetica;
+        margin-bottom: 30px;
+        font-size: 35px;
+    }
+    body{
+        margin: 0px;
+        background-color: black;
+    }
+    body, html {
+        height: 100%;
+    }
+    a{
+        color: rgb(199, 129, 38);
+    }
+
+    .bg-image {
+        /* The image used */
+        background-image: url("foto.jpg");
+
+        /* Add the blur effect */
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+
+        /* Full height */
+        
+        height: 100%;
+        width: 100%;
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+    }
+
+    .bg-text {
+        color: white;
+        font-weight: bold;
+        font-size: 50px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 80%;
+        padding: 20px;
+        text-align: center;
+        font-family: Helvetica;
+    }
+    .bg-text h1{
+        font-size: 55px;
+    }
+    span{
+        color: rgb(149, 255, 149);
+    }
+    .bogy{
+        position: relative;
+        width: 100%;
+        height: 0px;
+        background-color: black;
+        margin-top: -2%;   
+    }
+    .about{
+        margin-top: 100px;
+        text-align: center;
+        color: rgb(28, 112, 209);
+        font-size: 90px;
+        font-family: helvetica;
+        font-weight: bold;
+        padding: 20px;
+    }
+    .container{
+        display: grid;
+        grid-template-columns: 20% 30% 40% 5%;
+        margin-bottom: 300px;
+    }
+    .immagine{
+        animation: fadeIn 4s;
+        width:70%;
+        grid-column:  3 / span 1;
+        border-radius: 2px;
+    }
+    .testo{
+        padding: 10px 30px;
+        font-size: 30px;
+        font-family: arial;
+        color: white;
+        text-align: justify;
+        grid-column: 2 / span 1;
+        border-radius: 10px 0px 0px 10px;
+    }
+    .reveal{
+        position: relative;
+        transform: translateY(150px);
+        opacity: 0;
+        transition: all 1s ease;
+    }
+    .reveal.active{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+    .gray{
+        color: grey;
+    }
+    .social-container{
+        height: 40px;
+        grid-column: 2 / span 1;
+    }
+    .icon{
+        margin: 0px 0px 0px 35px;
+        height: 100%;
+    }
+    .navbar{
+        height: 80px;
+        width: 100%;
+        position: fixed;
+        font-family: helvetica;
+        background-color:black;
+        border-bottom: 4px solid white;
+        z-index: 200;
+    }
+    nav ul{
+        float: right;
+        margin-right: 0px;
+    }
+    nav ul li{
+        display: inline-block;
+        line-height: 80px;
+        margin: 0 55px 0 0;
+    }
+    nav ul li a{
+        color: white;
+        font-size: 18px;
+        transition: color cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    nav ul li a:hover{
+        color: rgb(199, 129, 38);
+        font-size: 17px;
+    }
+    @media all and (max-width: 1470px){
+        .testo{
+            grid-column: 1 / span 6;
+            font-size : 18px;
+        }
+        .immagine{
+            grid-column: 2 / span 2;
+            width: 100%;
+            margin-left: -50px;
+        }
+    }
+    @media all and (max-width: 1111px) and (min-width: 860px){
+        nav ul li {
+            margin: 0 30px 0 0;
+        }
+        .testo{
+            grid-column: 1 / span 6;
+            font-size : 18px;
+        }
+        .immagine{
+            grid-column: 2 / span 2;
+            width: 100%;
+            margin-left: -50px;
+        }
+        .az p{
+            font-size: 15px;
+        }
+        .az li{
+            font-size: 15px;
+        }
+        .az h1{
+            font-size: 18px;
+        }
+    }
+    .prices{
+        color: white;
+        display: grid;
+        background-color: black;
+        grid-template-columns: 11% 21% 7% 21% 7% 21% 11%;
+        font-weight: lighter;
+    }
+    .logo{
+        line-height: 2;
+        font-weight: bolder;
+        font-size: 40px;
+    }
+    .prices button{
+        width: 100%;
+        min-height: 60px;  
+        border-radius: 8px;
+        margin: auto;
+        cursor: pointer;
+        border: 2px solid rgb(199, 129, 38);
+        color:white;
+        margin-top: 30px;
+        font-weight: bold;
+        background-color: rgb(199, 129, 38);
+        font-family: helvetica;
+        font-size: 25px;
+    }
+    .prices p{
+        font-size: 25px;
+        font-family: arial;
+        text-align: justify;
+        margin: 10px;
+    }
+    .prices li{
+        font-family: arial;
+        font-size: 25px;
+        padding: 10px 30px;
+        list-style:disc;
+        text-align: left;
+    }
+    .card{
+        grid-column: 2 / span 1;
+        border: 3px solid white;
+        border-radius: 20px;
+        font-size: 30px;
+    }
+    .card:hover{
+        border: 3px solid rgb(199, 129, 38);;
+    }
+    .card1:hover{
+        border: 3px solid rgb(199, 129, 38);;
+    }
+    .card2:hover{
+        border: 3px solid rgb(199, 129, 38);;
+    }
+    .card h1{
+        color: rgb(28, 112, 209);
+        margin: 10px;
+    }
+    .card1{
+        grid-column: 4 / span 1;
+        border: 3px solid white;
+        border-radius: 20px;
+        font-size: 29px;
+    }
+    .card1 h1{
+        color: rgb(28, 112, 209);
+        margin: 10px;
+        font-size: 30px;
+    }
+    .card2{
+        grid-column: 6 / span 1;
+        border: 3px solid white;
+        border-radius: 20px;
+        font-size: 30px;
+    }
+    .card2 h1{
+        color: rgb(28, 112, 209);
+        margin: 10px;
+    }
+    .logo{
+        color: white;
+        margin: 30px;
+    }
+    @keyframes fadeIn {
+        from{
+            opacity: 0;
+        }
+
+        to{
+            opacity: 1;
+        }
+    }
+</style>
 <html>
+    <head><title>zSharpFire's Portolio</title></head>
     <body>
-        <a href="users.txt">Clicca qui</a>
+        <nav class="navbar">
+            <label class="logo">Franco.com</label>
+            <ul>
+                <li><a href="">home();</a></li>
+                <li><a href="#about">about();</a></li>
+                <li><a href="#contacts">contacts();</a></li>
+                <li><a href="#pricing">pricing();</a></li>
+                <li><a href="">blog();</a></li>
+            </ul>
+        </nav>
+        
+       <div class="bg-image" id="home"></div>
+
+        <div class="bg-text">
+            <h1>I'm zSharpFire</h1>
+            <p>And I'm a <span class="auto-type"></span></p>
+        </div>
+
+
+        <div style="border-top: 4px solid white"></div>
+        <div id="about"></div>
+        <div class="bogy">
+            <div class="about reveal">
+                <h1><span class="gray">&#60;</span>Who am i<span class="gray">&#62;</span></h1>
+            </div>
+            <div class="container reveal">
+                
+
+                <p class="testo">
+                    I'm a junior developer who studies in Italy, in the <a href="https://www.polomanettiporciatti.edu.it/" target="_blank">Polo Tecnologico Manetti Porciatti</a>
+                and in my spare time i try to develop interesting and useful apps. My best languagues are HTML, CSS, JavaScript, Python and C#.
+                I've participated in several Ludum Dare Game Jams
+                and i'm still looking forward to doing so</p>
+                <img src="computer.jpg" class="immagine">
+            </div>
+
+            <div class="about reveal">
+                <h1><span class="gray">&#60;</span>Contacts<span class="gray">&#62;</span></h1>
+            </div>
+            <div id="contacts"></div>
+            <div class="container reveal">
+                
+
+                <p class="testo">
+                You can find me on these social medias<br><br>
+                Have an interesting idea for a project? send me
+                an email at the address below!<br><br>
+                <a style="color: grey; font-weight:lighter">zsharpfirecoding@gmail.com</a>
+            </p>
+                <img src="twitterscreen.PNG" class="immagine">
+                <div class="social-container">
+                    <a href="https://www.instagram.com/zsharpfire_/" target="_blank"><img src="icons/Instagram.png" class="icon" href=""></a>
+                    <a href="https://twitter.com/zSharpFire" target="_blank"><img src="icons/Twitter.png" class="icon" href=""></a>
+                    <a href="https://t.me/+N8j9XOqCbpczNjdk" target="_blank"><img src="icons/Telegram.png" class="icon" href=""></a>
+                    <a href="https://www.youtube.com/channel/UC_grMEIMbYmKBLNMb9Bt_tw/featured" target="_blank"><img src="icons/Youtube.png" class="icon" href=""></a>
+                    <a href="" target="_blank"><img src="icons/LinkedIn.png" class="icon" href=""></a>
+                </div>
+            </div>
+            <div id="pricing"></div>
+            <div class="about reveal">
+                <h1><span class="gray">&#60;</span>Pricing<span class="gray">&#62;</span></h1>
+                <div class="prices">
+                    <div class="card">
+                        <h1><span class="gray">&#60;</span>App<span class="gray">&#62;</span></h1>
+                        <p>At this price, I will create:
+                            <li>Your 2D or 3D game in Unity
+                            <li>Your application in Python or Javascript
+                            <li>Your plugin
+                            <li>Your data visualizer and analyser app</li>
+                            <p>I can create complex or simple apps for your startup or for your personal projects</p>
+                            <br>
+                        </p>
+                    </div>
+                    <button style="grid-column: 4 / span 1; grid-row: 2 / span 1">20$</button>
+                    <div class="card1">
+                        <h1><span class="gray">&#60;</span>Bug bounty hunt<span class="gray">&#62;</span></h1>
+                        <p>At this price, I will:
+                            <li>Find security issues in your app
+                                <li>Pen-test your website
+                                <li>Fix all your security exploits
+                                <li>Find major bugs</li>
+                                <p>I will make sure that your app/website works correctly, without any security holes in them</p>
+                                <br>
+                        </p>
+                    </div>
+                    <button style="grid-column: 2 / span 1; grid-row: 2 / span 1">40$</button>
+                    <div class="card2">
+                        <h1><span class="gray">&#60;</span>Website<span class="gray">&#62;</span></h1>
+                        <p>At this price, I will:
+                            <li>Create a working SQL database
+                                <li>Create a working website
+                                <li>Make sure it is safe from major hacker attacks
+                                <li>Make it responsive to scaling</li>
+                                <p>The price does not include the server needed to host the website</p>
+                                <br>
+                        </p>
+                    </div>
+                    <button style="grid-column: 6 / span 1; grid-row: 2 / span 1">30$</button>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+        <script type="text/javascript">
+            window.addEventListener('scroll', reveal);
+
+            function reveal(){
+                var reveals = document.querySelectorAll('.reveal');
+
+                for(var i = 0; i < reveals.length; i++){
+                    var windowheight = window.innerHeight;
+                    var revealtop = reveals[i].getBoundingClientRect().top;
+                    var revealpoint = 150;
+
+                    if(revealtop < windowheight - revealpoint){
+                        reveals[i].classList.add('active');
+                    }
+                    else{
+                        reveals[i].classList.remove('active');
+                    }
+                }
+            }
+
+        </script>
+        <script type="text/javascript">
+            window.addEventListener("scroll", function(){
+                var header = document.querySelector('.navbar');
+                header.classList.toggle("sticky", window.scrollY > 0);
+            })
+        </script>
+        <script>
+            var typed = new Typed(".auto-type", {
+                strings: ["Game developer", "Developer", "Designer", "Pen-Tester", "Data analyst"],
+                typeSpeed: 100,
+                backSpeed: 100,
+                loop: true
+            })
+        </script>
     </body>
 </html>
